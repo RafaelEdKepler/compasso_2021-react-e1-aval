@@ -6,6 +6,9 @@ export const GlobalStyle = createGlobalStyle`
     --secondary: #FFFFFF;
 
     --link: #A9A9A9;
+    --border: #E5E4E2;
+
+    --gray-50: #fafafa;
   }
 
   * {

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { Container, Span, SpanTitle } from "./style";
 import { AiFillEye } from "react-icons/ai";
 
@@ -13,19 +15,25 @@ export default function Header() {
         <div>
           <img src={AiFillEye} />
           <a href="#">
-            <Span>Currently reading</Span>
+            <Span>
+              <Link to="/">Currently reading</Link>
+            </Span>
           </a>
         </div>
         <div>
           <img src="" />
           <a href="#">
-            <Span>Want to Read</Span>
+            <Span>
+              <Link to="/wantToRead">Want to Read</Link>
+            </Span>
           </a>
         </div>
         <div>
           <img src="" />
           <a href="#">
-            <Span>Read</Span>
+            <Span>
+              <Link to="/read">Read</Link>
+            </Span>
           </a>
         </div>
         <div>

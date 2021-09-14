@@ -45,6 +45,10 @@ export const Span = styled.span`
   color: var(--link);
   transition: 0.2s;
 
+  a {
+    color: inherit;
+  }
+
   &:hover {
     color: var(--secondary);
   }
