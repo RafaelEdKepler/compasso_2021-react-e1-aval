@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { updateBook, getMyBooks } from "../api";
+import { updateBook, getMyBooks, searchBooks, getBook } from "../api";
+import { useHistory } from "react-router-dom";
 
 const BookContext = createContext({});
 
@@ -7,23 +8,28 @@ export function BookProvider({ children }) {
   const [currentlyReadings, setCurrentlyReadings] = useState([]);
   const [wantToRead, setWantToRead] = useState([]);
   const [read, setRead] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [type, setType] = useState("");
+
+  const history = useHistory();
 
   useEffect(() => {
-    async function provideMyBooks() {
-      const response = await getMyBooks();
-      if (response.books) {
-        setWantToRead(
-          response.books.filter((item) => item.shelf === "wantToRead")
-        );
-        setCurrentlyReadings(
-          response.books.filter((item) => item.shelf === "currentlyReading")
-        );
-
-        setRead(response.books.filter((item) => item.shelf === "read"));
-      }
-    }
     provideMyBooks();
   }, []);
+
+  async function provideMyBooks() {
+    const response = await getMyBooks();
+    if (response.books) {
+      setWantToRead(
+        response.books.filter((item) => item.shelf === "wantToRead")
+      );
+      setCurrentlyReadings(
+        response.books.filter((item) => item.shelf === "currentlyReading")
+      );
+
+      setRead(response.books.filter((item) => item.shelf === "read"));
+    }
+  }
 
   const changeShelf = async (origin, index, destiny) => {
     let shelf = [];
@@ -63,6 +69,24 @@ export function BookProvider({ children }) {
     }
   };
 
+  const searchBooksByType = async (type) => {
+    setType(type);
+    const response = await searchBooks(type);
+    if (response) {
+      setSearch(response.books);
+    }
+    history.push("/search");
+  };
+
+  const addBookToShelf = async (idBook, shelf) => {
+    const responseMyBook = await getBook(idBook);
+    if (responseMyBook) {
+      const book = responseMyBook.book;
+      await updateBook(book, shelf);
+      await provideMyBooks();
+    }
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -73,6 +97,11 @@ export function BookProvider({ children }) {
         read,
         setRead,
         changeShelf,
+        type,
+        setType,
+        searchBooksByType,
+        search,
+        addBookToShelf,
       }}
     >
       {children}

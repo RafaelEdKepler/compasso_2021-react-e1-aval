@@ -3,7 +3,20 @@ import { Link } from "react-router-dom";
 import { Container, Span, SpanTitle } from "./style";
 import { AiFillEye } from "react-icons/ai";
 
-export default function Header() {
+import { types } from "../../utils/bookTypes";
+import { useEffect, useState } from "react";
+import useBook from "../../hooks/useBook";
+
+export default function Header(type) {
+  const [selectedOption, setSelectedOption] = useState("");
+  const { searchBooksByType } = useBook();
+
+  useEffect(() => {
+    if (type) {
+      setSelectedOption(type);
+    }
+  });
+
   return (
     <Container>
       <div>
@@ -37,8 +50,23 @@ export default function Header() {
           </a>
         </div>
         <div>
-          <select>
-            <option>...</option>
+          <select
+            onChange={(e) => searchBooksByType(e.target.value)}
+            defaultValue={type ? type : ""}
+          >
+            <option value="" disabled>
+              Search other books
+            </option>
+            {types &&
+              types.map((type) => (
+                <option
+                  key={type}
+                  value={type}
+                  onSelect={(type) => searchBooksByType(type)}
+                >
+                  {type}
+                </option>
+              ))}
           </select>
         </div>
       </div>

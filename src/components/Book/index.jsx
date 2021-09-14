@@ -43,7 +43,7 @@ export default function Book({ index, thumb, title, author, shelf }) {
     <Container>
       <img src={thumb} />
       <TitleSpan>{title}</TitleSpan>
-      <AuthorSpan>{author.map((author) => author)}</AuthorSpan>
+      <AuthorSpan>{author && author.map((author) => author)}</AuthorSpan>
       <DropdownMenu>
         <span>...</span>
         <DropdownMenuContent>

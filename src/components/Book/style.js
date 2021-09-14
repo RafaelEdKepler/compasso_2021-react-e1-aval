@@ -8,6 +8,7 @@ export const Container = styled.div`
   text-align: center;
   border: solid 1pt var(--border);
   border-bottom: 0;
+  margin-bottom: 30px;
 
   img {
     margin-left: -1px;
