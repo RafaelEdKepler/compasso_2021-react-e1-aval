@@ -1,10 +1,14 @@
+import { useState } from "react";
 import Book from "../../components/Book";
+import BookDetails from "../../components/BookDetails";
+import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import useBook from "../../hooks/useBook";
 import { Container } from "../style";
 
 export default function MyReadsPage() {
   const { currentlyReadings } = useBook();
+
   return (
     <div>
       <Header />
@@ -16,11 +20,12 @@ export default function MyReadsPage() {
               index={item.id}
               title={item.title}
               author={item.authors}
-              thumb={item.imageLinks.thumbnail}
+              thumb={item.imageLinks && item.imageLinks.thumbnail}
               shelf={0}
             />
           ))}
       </Container>
+      <Footer />
     </div>
   );
 }

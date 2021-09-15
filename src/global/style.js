@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
@@ -9,6 +9,11 @@ export const GlobalStyle = createGlobalStyle`
     --border: #E5E4E2;
 
     --gray-50: #fafafa;
+    --gray-300: #474a51;
+
+    --blue-50: #1890ff;
+
+    --black: #000;
   }
 
   * {
@@ -24,5 +29,24 @@ export const GlobalStyle = createGlobalStyle`
         @media (max-width: 720px) {
             font-size: 87.5%;
         }
+    }
+`;
+
+const SpinAnimation = keyframes`
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+`;
+
+export const SpinRotate = styled.div`
+    animation: ${SpinAnimation} 1s linear infinite;
+
+    svg {
+        padding: 0;
+        margin: 0;
     }
 `;

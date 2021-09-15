@@ -1,6 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { updateBook, getMyBooks, searchBooks, getBook } from "../api";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const BookContext = createContext({});
 
@@ -9,12 +9,16 @@ export function BookProvider({ children }) {
   const [wantToRead, setWantToRead] = useState([]);
   const [read, setRead] = useState([]);
   const [search, setSearch] = useState([]);
-  const [type, setType] = useState("");
+  const [type, setType] = useState("nooptions");
 
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     provideMyBooks();
+    if (!location.pathname.includes("search")) {
+      setType("nooptions");
+    }
   }, []);
 
   async function provideMyBooks() {
@@ -36,35 +40,35 @@ export function BookProvider({ children }) {
     let book = {};
     if (origin === 0) {
       shelf = [...currentlyReadings];
-      book = shelf.filter((item) => item.id === index);
+      book = shelf.filter((item) => item.id === index).shift();
       setCurrentlyReadings(shelf.filter((item) => item.id !== index));
     }
 
     if (origin === 1) {
       shelf = [...wantToRead];
-      book = shelf.filter((item) => item.id === index);
+      book = shelf.filter((item) => item.id === index).shift();
       setWantToRead(shelf.filter((item) => item.id !== index));
     }
 
     if (origin === 2) {
       shelf = [...read];
-      book = shelf.filter((item) => item.id === index);
+      book = shelf.filter((item) => item.id === index).shift();
       setRead(shelf.filter((item) => item.id !== index));
     }
 
     if (book) {
       if (destiny === 0) {
-        setCurrentlyReadings([...currentlyReadings, book[0]]);
-        await updateBook(book[0], "currentlyReading");
+        setCurrentlyReadings([...currentlyReadings, book]);
+        await updateBook(book, "currentlyReading");
       }
       if (destiny === 1) {
-        setWantToRead([...wantToRead, book[0]]);
-        const response = await updateBook(book[0], "wantToRead");
+        setWantToRead([...wantToRead, book]);
+        const response = await updateBook(book, "wantToRead");
         console.log(response);
       }
       if (destiny === 2) {
-        setRead([...read, book[0]]);
-        await updateBook(book[0], "read");
+        setRead([...read, book]);
+        await updateBook(book, "read");
       }
     }
   };
@@ -87,6 +91,29 @@ export function BookProvider({ children }) {
     }
   };
 
+  const removeBookFromShelf = async (index, origin) => {
+    let shelf = [];
+    let book = {};
+    if (index) {
+      if (origin === 0) {
+        shelf = [...currentlyReadings];
+        book = shelf.filter((item) => item.id === index).shift();
+        setCurrentlyReadings(shelf.filter((item) => item.id !== index));
+      }
+      if (origin === 1) {
+        shelf = [...wantToRead];
+        book = shelf.filter((item) => item.id === index).shift();
+        setWantToRead(shelf.filter((item) => item.id !== index));
+      }
+      if (origin === 2) {
+        shelf = [...read];
+        book = shelf.filter((item) => item.id === index).shift();
+        setRead(shelf.filter((item) => item.id !== index));
+      }
+      await updateBook(book, "noShelf");
+    }
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -102,6 +129,7 @@ export function BookProvider({ children }) {
         searchBooksByType,
         search,
         addBookToShelf,
+        removeBookFromShelf,
       }}
     >
       {children}

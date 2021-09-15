@@ -17,9 +17,10 @@ export const App = () => {
       <BookProvider>
         <Switch>
           <Route path="/" exact={true} component={MyReadsPage}/>
-          <Route path="/Read" exact={true} component={ReadPage}/>
-          <Route path="/WantToRead" exact={true} component={WantToReadPage}/>
-          <Route path="/search" exact={true} component={SearchPage}/>
+          <Route path="/currently_reading" component={MyReadsPage}/>
+          <Route path="/read" component={ReadPage}/>
+          <Route path="/want_to_read" component={WantToReadPage}/>
+          <Route path="/search" component={SearchPage}/>
         </Switch>
       <GlobalStyle/>
     </BookProvider>

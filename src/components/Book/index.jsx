@@ -7,33 +7,56 @@ import {
   DropdownMenuContent,
   DropdownMenu,
   SideMenuContent,
+  LabelOverviewMenu,
+  ExcludeDiv,
 } from "./style";
 
+import { BiTrashAlt } from "react-icons/bi";
+import { AiOutlineBook, AiOutlineCheck } from "react-icons/ai";
+
 export default function Book({ index, thumb, title, author, shelf }) {
-  const { changeShelf } = useBook();
+  const { changeShelf, removeBookFromShelf } = useBook();
 
   function changelShelfOptions() {
     if (shelf === 0) {
       return (
         <>
-          <li onClick={() => changeShelf(0, index, 1)}>Want to read</li>
-          <li onClick={() => changeShelf(0, index, 2)}>Read</li>
+          <li onClick={() => changeShelf(0, index, 1)}>
+            <AiOutlineBook />
+            Want to read
+          </li>
+          <li onClick={() => changeShelf(0, index, 2)}>
+            <AiOutlineCheck />
+            Read
+          </li>
         </>
       );
     }
     if (shelf === 1) {
       return (
         <>
-          <li onClick={() => changeShelf(1, index, 0)}>Currently reading</li>
-          <li onClick={() => changeShelf(1, index, 2)}>Read</li>
+          <li onClick={() => changeShelf(1, index, 0)}>
+            <AiOutlineBook />
+            Currently reading
+          </li>
+          <li onClick={() => changeShelf(1, index, 2)}>
+            <AiOutlineCheck />
+            Read
+          </li>
         </>
       );
     }
     if (shelf === 2) {
       return (
         <>
-          <li onClick={() => changeShelf(2, index, 0)}>Currently reading</li>
-          <li onClick={() => changeShelf(2, index, 1)}>Want to read</li>
+          <li onClick={() => changeShelf(2, index, 0)}>
+            <AiOutlineBook />
+            Currently reading
+          </li>
+          <li onClick={() => changeShelf(2, index, 1)}>
+            <AiOutlineCheck />
+            Want to read again
+          </li>
         </>
       );
     }
@@ -45,7 +68,9 @@ export default function Book({ index, thumb, title, author, shelf }) {
       <TitleSpan>{title}</TitleSpan>
       <AuthorSpan>{author && author.map((author) => author)}</AuthorSpan>
       <DropdownMenu>
-        <span>...</span>
+        <LabelOverviewMenu>
+          <span>...</span>
+        </LabelOverviewMenu>
         <DropdownMenuContent>
           <SideMenu>
             <span>Move to shelf</span>
@@ -53,7 +78,10 @@ export default function Book({ index, thumb, title, author, shelf }) {
               <ul>{changelShelfOptions()}</ul>
             </SideMenuContent>
           </SideMenu>
-          <span>Remove from the shelf</span>
+          <ExcludeDiv onClick={() => removeBookFromShelf(index, shelf)}>
+            <BiTrashAlt />
+            <span>Remove from the shelf</span>
+          </ExcludeDiv>
         </DropdownMenuContent>
       </DropdownMenu>
     </Container>
