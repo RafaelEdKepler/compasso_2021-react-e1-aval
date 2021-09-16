@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { ImSpinner2 } from "react-icons/im";
+import { AiOutlineEye, AiOutlineBook, AiOutlineCheck } from "react-icons/ai";
 import useBook from "../../hooks/useBook";
 import {
   AuthorSpan,
@@ -54,13 +55,22 @@ export default function Book({ index, thumb, title, author, shelf }) {
             </LabelOverviewMenu>
             <DropdownMenuContent>
               <div onClick={() => addBook(index, "currentlyReading")}>
-                <span>Currently reading</span>
+                <span>
+                  <AiOutlineEye/>
+                  Currently reading
+                </span>
               </div>
               <div onClick={() => addBook(index, "wantToRead")}>
-                <span>Want to read</span>
+                <span>
+                  <AiOutlineBook />
+                  Want to read
+                </span>
               </div>
               <div onClick={() => addBook(index, "read")}>
-                <span>Read</span>
+                <span>
+                  <AiOutlineCheck />
+                  Read
+                </span>
               </div>
             </DropdownMenuContent>
           </>

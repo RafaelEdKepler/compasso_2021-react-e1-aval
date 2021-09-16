@@ -8,7 +8,8 @@ export const Container = styled.header`
     display: flex;
     flex-direction: row;
     min-height: 65px;
-    max-width: 80%;
+    width: 80%;
+    max-width: 1120px;
 
     div:first-child {
       display: flex;
@@ -19,6 +20,7 @@ export const Container = styled.header`
       min-height: 30px;
       display: flex;
       margin: auto 35px auto 50px;
+      padding: 5px 15px 5px 15px;
 
       a {
         text-decoration: none;

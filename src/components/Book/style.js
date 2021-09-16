@@ -46,6 +46,26 @@ export const DropdownMenuContent = styled.div`
   text-align: left;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+
+  div {
+    display: flex;
+
+
+    span {
+      margin: auto 0;
+      display: flex;
+      align-items: center;
+
+      svg {
+        margin: auto 15px auto 5px;
+        transition: 0.2s;
+      }
+    }
+
+    &:hover svg, &:hover span {
+      color: var(--blue-50);
+    }
+  }
 `;
 
 export const DropdownMenu = styled.div`
