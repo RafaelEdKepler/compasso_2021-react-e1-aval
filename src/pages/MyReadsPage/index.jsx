@@ -1,6 +1,4 @@
-import { useState } from "react";
 import Book from "../../components/Book";
-import BookDetails from "../../components/BookDetails";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import useBook from "../../hooks/useBook";
