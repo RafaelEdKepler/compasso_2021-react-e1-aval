@@ -63,8 +63,7 @@ export function BookProvider({ children }) {
       }
       if (destiny === 1) {
         setWantToRead([...wantToRead, book]);
-        const response = await updateBook(book, "wantToRead");
-        console.log(response);
+        await updateBook(book, "wantToRead");
       }
       if (destiny === 2) {
         setRead([...read, book]);

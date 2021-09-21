@@ -6,17 +6,14 @@ import {
   SpanTitle,
   PathContainer,
   LinkContainer,
+  SelectContainer,
+  HeaderContainer,
+  BrandContainer,
 } from "./style";
 import { AiOutlineEye, AiOutlineBook, AiOutlineCheck } from "react-icons/ai";
-
-import { types } from "../../utils/bookTypes";
-import { useEffect, useState } from "react";
-import useBook from "../../hooks/useBook";
+import SingleSelect from "../SingleSelect";
 
 export default function Header() {
-  const [selectedOption, setSelectedOption] = useState("nooption");
-  const { searchBooksByType, type } = useBook();
-
   const location = useLocation();
 
   function transcriptRoute() {
@@ -25,19 +22,15 @@ export default function Header() {
       .replace(/_/g, " ");
   }
 
-  useEffect(() => {
-    setSelectedOption(type);
-  });
-
   return (
     <>
       <Container>
-        <div>
-          <div>
+        <HeaderContainer>
+          <BrandContainer>
             <Link to="/">
               <SpanTitle>MyReads</SpanTitle>
             </Link>
-          </div>
+          </BrandContainer>
           <LinkContainer
             selected={location.pathname.includes("/currently_reading")}
           >
@@ -58,12 +51,10 @@ export default function Header() {
               <Link to="/read">Read</Link>
             </Span>
           </LinkContainer>
-          <LinkContainer>
-            <div>
-              <SingleSelect />
-            </div>
-          </LinkContainer>
-        </div>
+          <SelectContainer>
+            <SingleSelect />
+          </SelectContainer>
+        </HeaderContainer>
       </Container>
       <PathContainer>
         <span>
@@ -73,28 +64,3 @@ export default function Header() {
     </>
   );
 }
-
-/*
-<LinkContainer selected={location.pathname.includes("search")}>
-            <select onChange={(e) => searchBooksByType(e.target.value)}>
-              <option
-                value="nooption"
-                selected={selectedOption === "nooption"}
-                disabled
-              >
-                Search other books
-              </option>
-              {types &&
-                types.map((type) => (
-                  <option
-                    key={type}
-                    value={type}
-                    selected={type === selectedOption}
-                    onSelect={(type) => searchBooksByType(type)}
-                  >
-                    {type}
-                  </option>
-                ))}
-            </select>
-          </LinkContainer>
-*/

@@ -3,47 +3,47 @@ import styled from 'styled-components';
 export const Container = styled.header`
   min-height: 65px;
   background: var(--primary);
+`;
 
-  div {
-    display: flex;
-    flex-direction: row;
-    min-height: 65px;
-    width: 80%;
-    max-width: 1120px;
+export const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  min-height: 65px;
+  width: 80%;
+  max-width: 1120px;
 
-    div:first-child {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.2);
-      width: 120px;
-      min-height: 30px;
-      display: flex;
-      margin: auto 35px auto 50px;
-      padding: 5px 15px 5px 15px;
+  select {
+    width: 200px;
+    border-radius: 5px;
+  }
 
-      a {
-        text-decoration: none;
-      }
+  svg {
+    color: var(--link);
+    margin-right: 15px;
+    transition: .2s;
+    height: 15px;
+    width: 15px;
+  }
+`;
 
-    }
-    select {
-      width: 200px;
-      border-radius: 5px;
-    }
+export const BrandContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  width: 120px;
+  min-height: 30px;
+  display: flex;
+  margin: auto 35px auto 50px;
+  padding: 5px 15px 5px 15px;
 
-    svg {
-      color: var(--link);
-      margin-right: 15px;
-      transition: .2s;
-      height: 15px;
-      width: 15px;
-    }
+  a {
+    text-decoration: none;
   }
 `;
 
 export const LinkContainer = styled.div`
-  height: 100%;
+  min-height: 65px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -57,6 +57,15 @@ export const LinkContainer = styled.div`
 
   a {
     text-decoration: none;
+  }
+`;
+
+export const SelectContainer = styled.div`
+  height: 50px;
+  width: 50px;
+
+  div {
+    display: block;
   }
 `;
 

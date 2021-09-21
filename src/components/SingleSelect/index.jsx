@@ -4,36 +4,63 @@ import { types } from "../../utils/bookTypes";
 
 import Select from "react-select";
 import { ComboContainer } from "./style";
+import useBook from "../../hooks/useBook";
+import { useLocation } from "react-router";
 
 export default function SingleSelect() {
-  const [isClearable, setIsClearable] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isRtl, setIsRtl] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
   const [options, setOptions] = useState([{}]);
+  const [selectedOption, setSelectedOption] = useState("");
 
-  let arrayOptions = [{ value: "", label: "Search for other books" }];
+  const { searchBooksByType } = useBook();
+
+  const location = useLocation();
+
   useEffect(() => {
-    types.forEach((item) => {
-      arrayOptions.push({ value: item, label: item });
-    });
-    setOptions(arrayOptions);
+    if (options.length <= 1) {
+      setOptions(
+        types.map((item) => {
+          return { value: item, label: item };
+        })
+      );
+    }
+  }, [types]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("selectedOption") && !selectedOption) {
+      setSelectedOption(JSON.parse(sessionStorage.getItem("selectedOption")));
+    }
   });
 
   const customStyles = {
-    control: () => ({
-      width: 500,
-      height: 65,
+    control: (provided) => ({
+      ...provided,
+      background: "#fff",
+      borderColor: "#9e9e9e",
+      minHeight: "30px",
+      height: "30px",
+      width: "200px",
     }),
   };
 
-  console.log(options);
+  function handleChange(option) {
+    if (!location.pathname.includes("/search")) {
+      sessionStorage.setItem("selectedOption", JSON.stringify(option));
+    }
+    searchBooksByType(option.value);
+    setSelectedOption(option);
+  }
 
   return (
     <ComboContainer>
       {options && options.length > 1 && (
-        <Select isSearchable={true} options={options} />
+        <Select
+          isSearchable={true}
+          options={options}
+          style={customStyles}
+          placeholder="Search for other books"
+          value={selectedOption}
+          onChange={handleChange}
+        />
       )}
     </ComboContainer>
   );
