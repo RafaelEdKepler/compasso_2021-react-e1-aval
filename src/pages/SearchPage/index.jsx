@@ -21,6 +21,7 @@ export default function SearchPage() {
               author={item.authors}
               thumb={item.imageLinks && item.imageLinks.thumbnail}
               shelf={2}
+              type="search"
             />
           ))}
       </Container>

@@ -19,6 +19,7 @@ export default function ReadPage() {
               author={item.authors}
               thumb={item.imageLinks && item.imageLinks.thumbnail}
               shelf={2}
+              type="shelf"
             />
           ))}
       </Container>

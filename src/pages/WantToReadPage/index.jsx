@@ -19,6 +19,7 @@ export default function WantToReadPage() {
               author={item.authors}
               thumb={item.imageLinks && item.imageLinks.thumbnail}
               shelf={1}
+              type="shelf"
             />
           ))}
       </Container>

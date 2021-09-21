@@ -20,6 +20,7 @@ export default function MyReadsPage() {
               author={item.authors}
               thumb={item.imageLinks && item.imageLinks.thumbnail}
               shelf={0}
+              type="shelf"
             />
           ))}
       </Container>

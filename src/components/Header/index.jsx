@@ -12,6 +12,7 @@ import {
 } from "./style";
 import { AiOutlineEye, AiOutlineBook, AiOutlineCheck } from "react-icons/ai";
 import SingleSelect from "../SingleSelect";
+import MyLink from "../MyLink";
 
 export default function Header() {
   const location = useLocation();
@@ -31,29 +32,16 @@ export default function Header() {
               <SpanTitle>MyReads</SpanTitle>
             </Link>
           </BrandContainer>
-          <LinkContainer
-            selected={location.pathname.includes("/currently_reading")}
-          >
-            <Span>
-              <AiOutlineEye />
-              <Link to="/currently_reading">Currently reading</Link>
-            </Span>
-          </LinkContainer>
-          <LinkContainer selected={location.pathname.includes("/want_to_read")}>
-            <Span>
-              <AiOutlineBook />
-              <Link to="/want_to_read">Want to Read</Link>
-            </Span>
-          </LinkContainer>
-          <LinkContainer selected={location.pathname.includes("/read")}>
-            <Span>
-              <AiOutlineCheck />
-              <Link to="/read">Read</Link>
-            </Span>
-          </LinkContainer>
-          <SelectContainer>
-            <SingleSelect />
-          </SelectContainer>
+          <MyLink route="currently_reading" title="Currently Reading">
+            <AiOutlineEye />
+          </MyLink>
+          <MyLink route="want_to_read" title="Want to read">
+            <AiOutlineBook />
+          </MyLink>
+          <MyLink route="read" title="Read">
+            <AiOutlineCheck />
+          </MyLink>
+          <SingleSelect />
         </HeaderContainer>
       </Container>
       <PathContainer>

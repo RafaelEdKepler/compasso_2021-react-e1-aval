@@ -9,16 +9,11 @@ export function BookProvider({ children }) {
   const [wantToRead, setWantToRead] = useState([]);
   const [read, setRead] = useState([]);
   const [search, setSearch] = useState([]);
-  const [type, setType] = useState("nooptions");
 
   const history = useHistory();
-  const location = useLocation();
 
   useEffect(() => {
     provideMyBooks();
-    if (!location.pathname.includes("search")) {
-      setType("nooptions");
-    }
   }, []);
 
   async function provideMyBooks() {
@@ -35,25 +30,29 @@ export function BookProvider({ children }) {
     }
   }
 
+  /*
+  origin/destiny
+  0 => currently reading
+  1 => want to read
+  2 => read
+  */
   const changeShelf = async (origin, index, destiny) => {
-    let shelf = [];
     let book = {};
     if (origin === 0) {
-      shelf = [...currentlyReadings];
-      book = shelf.filter((item) => item.id === index).shift();
-      setCurrentlyReadings(shelf.filter((item) => item.id !== index));
+      book = currentlyReadings.filter((item) => item.id === index).shift();
+      setCurrentlyReadings(
+        currentlyReadings.filter((item) => item.id !== index)
+      );
     }
 
     if (origin === 1) {
-      shelf = [...wantToRead];
-      book = shelf.filter((item) => item.id === index).shift();
-      setWantToRead(shelf.filter((item) => item.id !== index));
+      book = wantToRead.filter((item) => item.id === index).shift();
+      setWantToRead(wantToRead.filter((item) => item.id !== index));
     }
 
     if (origin === 2) {
-      shelf = [...read];
-      book = shelf.filter((item) => item.id === index).shift();
-      setRead(shelf.filter((item) => item.id !== index));
+      book = read.filter((item) => item.id === index).shift();
+      setRead(read.filter((item) => item.id !== index));
     }
 
     if (book) {
@@ -73,7 +72,6 @@ export function BookProvider({ children }) {
   };
 
   const searchBooksByType = async (type) => {
-    setType(type);
     const response = await searchBooks(type);
     if (response) {
       setSearch(response.books);
@@ -82,32 +80,35 @@ export function BookProvider({ children }) {
   };
 
   const addBookToShelf = async (idBook, shelf) => {
-    const responseMyBook = await getBook(idBook);
-    if (responseMyBook) {
-      const book = responseMyBook.book;
-      await updateBook(book, shelf);
+    const response = await getBook(idBook);
+    if (response && response.book) {
+      await updateBook(response.book, shelf);
       await provideMyBooks();
     }
   };
 
+  /*
+  origin
+  0 => currently reading
+  1 => want to read
+  2 => read
+  */
   const removeBookFromShelf = async (index, origin) => {
-    let shelf = [];
     let book = {};
     if (index) {
       if (origin === 0) {
-        shelf = [...currentlyReadings];
-        book = shelf.filter((item) => item.id === index).shift();
-        setCurrentlyReadings(shelf.filter((item) => item.id !== index));
+        book = currentlyReadings.filter((item) => item.id === index).shift();
+        setCurrentlyReadings(
+          currentlyReadings.filter((item) => item.id !== index)
+        );
       }
       if (origin === 1) {
-        shelf = [...wantToRead];
-        book = shelf.filter((item) => item.id === index).shift();
-        setWantToRead(shelf.filter((item) => item.id !== index));
+        book = wantToRead.filter((item) => item.id === index).shift();
+        setWantToRead(wantToRead.filter((item) => item.id !== index));
       }
       if (origin === 2) {
-        shelf = [...read];
-        book = shelf.filter((item) => item.id === index).shift();
-        setRead(shelf.filter((item) => item.id !== index));
+        book = read.filter((item) => item.id === index).shift();
+        setRead(read.filter((item) => item.id !== index));
       }
       await updateBook(book, "noShelf");
     }
@@ -123,8 +124,6 @@ export function BookProvider({ children }) {
         read,
         setRead,
         changeShelf,
-        type,
-        setType,
         searchBooksByType,
         search,
         addBookToShelf,
