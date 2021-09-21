@@ -13,7 +13,7 @@ export default function MyReadsPage() {
       <Container>
         {currentlyReadings &&
           currentlyReadings.map((item) => (
-            <Book book={item} shelf={0} type="shelf" />
+            <Book key={item.id} book={item} shelf={0} type="shelf" />
           ))}
       </Container>
       <Footer />

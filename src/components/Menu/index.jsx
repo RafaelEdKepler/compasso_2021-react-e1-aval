@@ -18,7 +18,7 @@ import {
   SideMenuContent,
 } from "./style";
 
-export default function MenuBook({ shelf, index, type }) {
+export default function Menu({ shelf, index, type }) {
   const [added, setAdded] = useState(0);
   const { changeShelf, removeBookFromShelf, addBookToShelf } = useBook();
 
@@ -28,11 +28,11 @@ export default function MenuBook({ shelf, index, type }) {
         <>
           <li onClick={() => changeShelf(0, index, 1)}>
             <AiOutlineBook />
-            Want to read
+            <span>Want to read</span>
           </li>
           <li onClick={() => changeShelf(0, index, 2)}>
             <AiOutlineCheck />
-            Read
+            <span>Read</span>
           </li>
         </>
       );
@@ -41,12 +41,12 @@ export default function MenuBook({ shelf, index, type }) {
       return (
         <>
           <li onClick={() => changeShelf(1, index, 0)}>
-            <AiOutlineBook />
-            Currently reading
+            <AiOutlineEye />
+            <span>Currently reading</span>
           </li>
           <li onClick={() => changeShelf(1, index, 2)}>
             <AiOutlineCheck />
-            Read
+            <span>Read</span>
           </li>
         </>
       );
@@ -55,12 +55,12 @@ export default function MenuBook({ shelf, index, type }) {
       return (
         <>
           <li onClick={() => changeShelf(2, index, 0)}>
-            <AiOutlineBook />
-            Currently reading
+            <AiOutlineEye />
+            <span>Currently reading</span>
           </li>
           <li onClick={() => changeShelf(2, index, 1)}>
-            <AiOutlineCheck />
-            Want to read again
+            <AiOutlineBook />
+            <span>Want to read again</span>
           </li>
         </>
       );

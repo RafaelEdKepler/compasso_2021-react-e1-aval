@@ -103,6 +103,30 @@ export const SideMenuContent = styled.div`
       }
     }
   }
+
+  @media(max-width: 500px) {
+
+    width: 50px;
+
+    ul {
+      min-height: 60px;
+
+      li {
+        display: flex;
+        justify-content: center;
+        height: 25px;
+
+        svg {
+          width: 15px;
+          height: 15px;
+        }
+
+        span {
+          display: none;
+        }
+      }
+    }
+  }
 `;
 
 export const SideMenu = styled.div`

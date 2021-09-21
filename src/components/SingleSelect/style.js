@@ -7,6 +7,10 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   background: ${props => props.selected ? 'var(--blue-50)' : 'transparent'};
+
+  @media(max-width: 700px) {
+    display: none;
+  }
 `;
 
 export const ComboContainer = styled.div`

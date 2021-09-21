@@ -11,7 +11,9 @@ export default function ReadPage() {
       <Header />
       <Container>
         {read &&
-          read.map((item) => <Book book={item} shelf={0} type="shelf" />)}
+          read.map((item) => (
+            <Book key={item.id} book={item} shelf={2} type="shelf" />
+          ))}
       </Container>
       <Footer />
     </div>

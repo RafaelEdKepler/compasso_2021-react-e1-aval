@@ -8,10 +8,8 @@ export default function MyLink({ title, route, children }) {
   return (
     <Link to={"/" + route}>
       <LinkContainer selected={location.pathname.includes("/" + route)}>
-        <Span>
-          {children}
-          {title}
-        </Span>
+        {children}
+        <Span>{title}</Span>
       </LinkContainer>
     </Link>
   );

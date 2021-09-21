@@ -10,12 +10,33 @@ export const LinkContainer = styled.div`
   background-color: ${props => props.selected ? 'var(--blue-50)' : 'transparent'};
   padding: 0 25px;
 
-  span, span svg {
+  span, svg {
     color: ${props => props.selected ? 'var(--secondary)' : 'var(--link)'};
   }
 
   a {
     text-decoration: none;
+  }
+
+  @media(min-width: 1360px) {
+    min-width: 250px;
+  }
+
+  @media(max-width: 1000px) {
+    width: 15px;
+    min-width: 50px;
+    justify-content: center;
+
+    svg {
+      min-width: 15px;
+      min-height: 15px;
+      margin-left: 10px;
+      color: ${props => props.selected ? 'var(--secondary)' : 'var(--link)'};
+    }
+
+    span {
+      display: none;
+    }
   }
 `;
 

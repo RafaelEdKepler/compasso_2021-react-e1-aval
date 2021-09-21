@@ -4,6 +4,12 @@ import { Span } from '../MyLink/style';
 export const Container = styled.header`
   min-height: 65px;
   background: var(--primary);
+
+  @media(max-width: 500px) {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
 `;
 
 export const HeaderContainer = styled.div`
@@ -11,6 +17,7 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   min-height: 65px;
   max-width: 1220px;
+  background: var(--primary);
 
   select {
     width: 200px;
@@ -23,6 +30,10 @@ export const HeaderContainer = styled.div`
     transition: .2s;
     height: 15px;
     width: 15px;
+  }
+
+  @media(min-width: 1360px) {
+    max-width: 1420px;
   }
 `;
 
@@ -65,5 +76,9 @@ export const PathContainer = styled.div`
         color: var(--blue-50);
       }
     }
+  }
+
+  @media (max-width: 500px) {
+    margin-top: 65px;
   }
 `;
