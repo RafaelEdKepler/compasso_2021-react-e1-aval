@@ -13,15 +13,7 @@ export default function MyReadsPage() {
       <Container>
         {currentlyReadings &&
           currentlyReadings.map((item) => (
-            <Book
-              key={item.id}
-              index={item.id}
-              title={item.title}
-              author={item.authors}
-              thumb={item.imageLinks && item.imageLinks.thumbnail}
-              shelf={0}
-              type="shelf"
-            />
+            <Book book={item} shelf={0} type="shelf" />
           ))}
       </Container>
       <Footer />

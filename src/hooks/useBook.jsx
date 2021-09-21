@@ -73,10 +73,10 @@ export function BookProvider({ children }) {
 
   const searchBooksByType = async (type) => {
     const response = await searchBooks(type);
+    history.push("/search");
     if (response) {
       setSearch(response.books);
     }
-    history.push("/search");
   };
 
   const addBookToShelf = async (idBook, shelf) => {

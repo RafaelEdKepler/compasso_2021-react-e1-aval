@@ -2,11 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 
 import {
   Container,
-  Span,
   SpanTitle,
   PathContainer,
-  LinkContainer,
-  SelectContainer,
   HeaderContainer,
   BrandContainer,
 } from "./style";

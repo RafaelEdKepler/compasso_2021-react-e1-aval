@@ -13,17 +13,7 @@ export default function SearchPage() {
       <Header />
       <Container>
         {search &&
-          search.map((item) => (
-            <Book
-              key={item.id}
-              index={item.id}
-              title={item.title}
-              author={item.authors}
-              thumb={item.imageLinks && item.imageLinks.thumbnail}
-              shelf={2}
-              type="search"
-            />
-          ))}
+          search.map((item) => <Book book={item} shelf={0} type="search" />)}
       </Container>
       <Footer />
     </div>

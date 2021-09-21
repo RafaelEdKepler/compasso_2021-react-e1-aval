@@ -11,7 +11,7 @@ export default function SingleSelect() {
   const [options, setOptions] = useState([{}]);
   const [selectedOption, setSelectedOption] = useState("");
 
-  const { searchBooksByType } = useBook();
+  const { searchBooksByType, search } = useBook();
 
   const location = useLocation();
 
@@ -28,12 +28,7 @@ export default function SingleSelect() {
   useEffect(() => {
     if (sessionStorage.getItem("selectedOption") && !selectedOption) {
       setSelectedOption(JSON.parse(sessionStorage.getItem("selectedOption")));
-    }
-
-    if (!location.pathname.includes("search")) {
-      if (sessionStorage.getItem("selectedOption")) {
-        sessionStorage.removeItem("selectedOption");
-      }
+      sessionStorage.removeItem("selectedOption");
     }
   });
 
