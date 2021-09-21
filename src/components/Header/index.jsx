@@ -58,7 +58,24 @@ export default function Header() {
               <Link to="/read">Read</Link>
             </Span>
           </LinkContainer>
-          <LinkContainer selected={location.pathname.includes("search")}>
+          <LinkContainer>
+            <div>
+              <SingleSelect />
+            </div>
+          </LinkContainer>
+        </div>
+      </Container>
+      <PathContainer>
+        <span>
+          <Link to="/">Home </Link>/ {transcriptRoute()}
+        </span>
+      </PathContainer>
+    </>
+  );
+}
+
+/*
+<LinkContainer selected={location.pathname.includes("search")}>
             <select onChange={(e) => searchBooksByType(e.target.value)}>
               <option
                 value="nooption"
@@ -80,13 +97,4 @@ export default function Header() {
                 ))}
             </select>
           </LinkContainer>
-        </div>
-      </Container>
-      <PathContainer>
-        <span>
-          <Link to="/">Home </Link>/ {transcriptRoute()}
-        </span>
-      </PathContainer>
-    </>
-  );
-}
+*/

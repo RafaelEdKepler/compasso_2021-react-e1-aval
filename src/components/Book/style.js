@@ -55,6 +55,7 @@ export const DropdownMenuContent = styled.div`
       margin: auto 0;
       display: flex;
       align-items: center;
+      font-size: 12px;
 
       svg {
         margin: auto 15px auto 5px;
@@ -99,10 +100,11 @@ export const DropdownMenu = styled.div`
 
 export const SideMenuContent = styled.div`
   width: 200px;
-  display: none;
+  display: none !important;
   z-index: 1;
   margin-left: 15px;
   border-radius: 1px;
+  background: var(--secondary);
 
   ul {
     list-style: none;
@@ -145,8 +147,7 @@ export const SideMenu = styled.div`
   span {
     width: 200px;
     font-size: 12px;
-    margin-left: 10px;
-    padding: 0;
+    padding-left: 10px;
   }
 
   &:hover {
@@ -154,7 +155,7 @@ export const SideMenu = styled.div`
   }
 
   &:hover ${SideMenuContent} {
-    display: block;
+    display: block !important;
   }
 `;
 

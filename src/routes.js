@@ -1,4 +1,5 @@
 import { Route, Switch } from "react-router"
+import SingleSelect from "./components/SingleSelect"
 import MyReadsPage from "./pages/MyReadsPage"
 import ReadPage from "./pages/ReadPage"
 import SearchPage from "./pages/SearchPage"
@@ -12,6 +13,7 @@ export default function Routes() {
       <Route path="/read" component={ReadPage}/>
       <Route path="/want_to_read" component={WantToReadPage}/>
       <Route path="/search" component={SearchPage}/>
+      <Route path="/test" component={SingleSelect}/>
     </Switch>
   )
 }
