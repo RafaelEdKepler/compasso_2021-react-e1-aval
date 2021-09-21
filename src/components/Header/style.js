@@ -10,8 +10,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   min-height: 65px;
-  width: 80%;
-  max-width: 1120px;
+  max-width: 1220px;
 
   select {
     width: 200px;

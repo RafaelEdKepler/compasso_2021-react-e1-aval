@@ -11,7 +11,7 @@ export default function SingleSelect() {
   const [options, setOptions] = useState([{}]);
   const [selectedOption, setSelectedOption] = useState("");
 
-  const { searchBooksByType, search } = useBook();
+  const { searchBooksByType } = useBook();
 
   const location = useLocation();
 
@@ -52,7 +52,7 @@ export default function SingleSelect() {
   }
 
   return (
-    <Container>
+    <Container selected={location.pathname.includes("/search")}>
       <ComboContainer>
         {options && options.length > 1 && (
           <Select
