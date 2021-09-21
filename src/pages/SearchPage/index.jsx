@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import AddBook from "../../components/AddBook";
+import Book from "../../components/Book";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import useBook from "../../hooks/useBook";
@@ -14,7 +14,7 @@ export default function SearchPage() {
       <Container>
         {search &&
           search.map((item) => (
-            <AddBook
+            <Book
               key={item.id}
               index={item.id}
               title={item.title}
